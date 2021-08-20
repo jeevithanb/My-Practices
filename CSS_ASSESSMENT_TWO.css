@@ -1,0 +1,35 @@
+P{
+  font-family: 'Dancing Script', cursive;
+  weight:537;
+  font-size: 25px;
+  text-align: center;
+}
+td{
+  width:150px;
+  height:300px;
+  border:6px solid white;
+}
+.art{
+  margin:auto;
+}
+#rectangle_one{
+
+  background:#ffc8dd;
+}
+#rectangle_two{
+
+  background:#9d4edd;
+}
+#rectangle_three{
+
+  background:#00bbf9;
+
+}
+#rectangle_four{
+
+  background:#b8bedd;
+}
+#rectangle_five{
+
+  background:#007f5f;
+}
