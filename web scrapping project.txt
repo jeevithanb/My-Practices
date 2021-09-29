@@ -1,0 +1,147 @@
+port requests
+import bs4
+base_url='https://books.toscrape.com/catalogue/page-{}.html'
+base_url.format(3)
+'https://books.toscrape.com/catalogue/page-3.html'
+weblink=requests.get(base_url.format(1))
+weblink
+<Response [200]>
+soup=bs4.BeautifulSoup(weblink.text,'lxml')
+booklist=soup.select('.product_pod')[0]
+#for items in booklist('h3'):
+#    print(items.text)
+lists=booklist.select('a')[1]['title']
+lists
+'A Light in the Attic'
+total_books=[]
+
+for items in range(1,51):
+    scraping_url=requests.get(base_url.format(items))
+    soup=bs4.BeautifulSoup(scraping_url.text,'lxml')
+    list_of_books=soup.select('.product_pod')
+    
+    for items in list_of_books:   #list of books in bookscrape website
+        if 'title' in str(items):
+            final=items.select('a')[1]['title']
+            total_books.append(final)
+len(total_books)
+1000
+#   !!!!!Hurrayyyy GOT it
+result=soup.select('.product_pod')[0]
+result
+<article class="product_pod">
+<div class="image_container">
+<a href="a-light-in-the-attic_1000/index.html"><img alt="A Light in the Attic" class="thumbnail" src="../media/cache/2c/da/2cdad67c44b002e7ead0cc35693c0e8b.jpg"/></a>
+</div>
+<p class="star-rating Three">
+<i class="icon-star"></i>
+<i class="icon-star"></i>
+<i class="icon-star"></i>
+<i class="icon-star"></i>
+<i class="icon-star"></i>
+</p>
+<h3><a href="a-light-in-the-attic_1000/index.html" title="A Light in the Attic">A Light in the ...</a></h3>
+<div class="product_price">
+<p class="price_color">Â£51.77</p>
+<p class="instock availability">
+<i class="icon-ok"></i>
+    
+        In stock
+    
+</p>
+<form>
+<button class="btn btn-primary btn-block" data-loading-text="Adding..." type="submit">Add to basket</button>
+</form>
+</div>
+</article>
+#result.select('a')[0]
+result.select('.star-rating.Three')
+[<p class="star-rating Three">
+ <i class="icon-star"></i>
+ <i class="icon-star"></i>
+ <i class="icon-star"></i>
+ <i class="icon-star"></i>
+ <i class="icon-star"></i>
+ </p>]
+result.select('a')[1]['title']
+'A Light in the Attic'
+Main Logic !!
+
+star_rating_three=[]
+
+for pages in range(1,51):
+    
+    scrape_url=requests.get(base_url.format(pages))
+    soup=bs4.BeautifulSoup(scrape_url.text,'lxml')
+    books=soup.select('.product_pod')
+    
+    for book in books:
+        
+        if 'star-rating Three' in str(book):
+            book_title=book.select('a')[1]['title']
+            star_rating_three.append(book_title)
+            
+#star_rating_three
+three=len(star_rating_three)   #203
+star_rating_one=[]
+
+for pages in range(1,51):
+    scrape_url=requests.get(base_url.format(pages))
+    soup=bs4.BeautifulSoup(scrape_url.text,'lxml')
+    books=soup.select('.product_pod')
+    
+    for items in books:
+        
+        if 'star-rating One' in str(items):
+            
+            b_title=items.select('a')[1]['title']
+            star_rating_one.append(b_title)
+#star_rating_one
+one=len(star_rating_one)  #226
+star_rating_two=[]
+
+for n in range(1,51):
+    scrape_url=requests.get(base_url.format(n))
+    soup=bs4.BeautifulSoup(scrape_url.text,'lxml')
+    book=soup.select('.product_pod')
+    
+    for book in book:
+        
+        if 'star-rating Two' in str(book):
+            title=book.select('a')[1]['title']
+            star_rating_two.append(title)
+    
+    
+#star_rating_two
+two=len(star_rating_two)  #196
+star_rating_four=[]
+
+for n in range(1,51):
+    scrape_url=requests.get(base_url.format(n))
+    soup=bs4.BeautifulSoup(scrape_url.text,'lxml')
+    book_title=soup.select('.product_pod')
+    
+    for book in book_title:
+        if 'star-rating Four' in str(book):
+            titles=book.select('a')[1]['title']
+            star_rating_four.append(titles)
+#star_rating_four
+four=len(star_rating_four)  #179
+star_rating_five=[]
+
+for n in range(1,51):
+    
+    scrape_url=requests.get(base_url.format(n))
+    soup=bs4.BeautifulSoup(scrape_url.text,'lxml')
+    book=soup.select('.product_pod')
+    
+    for book in book:
+        if 'star-rating Five' in str(book):
+            title_five=book.select('a')[1]['title']
+            star_rating_five.append(title_five)
+#star_rating_five
+five=len(star_rating_five)   #196
+total_books_on_toscrape = one + two + three + four + five
+total_books_on_toscrape
+1000
+##   DONE !!!!
